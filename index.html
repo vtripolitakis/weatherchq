@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang='el'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>🌤️ Πρόγνωση Καιρού</title>
+<style>
+* { box-sizing: border-box; }
+body { 
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #111827;
+  margin: 0;
+  padding: 1rem;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+.day-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.day-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+.day-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+.day-title .day-name { color: #4f46e5; }
+.day-title .date {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+.table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; }
+th, td { padding: 0.75rem 0.5rem; text-align: center; font-size: 0.9rem; }
+th {
+  border-bottom: 2px solid #e5e7eb;
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+tbody tr { transition: background-color 0.2s ease; }
+tbody tr:nth-child(even) { background: #f9fafb; }
+tbody tr:nth-child(odd) { background: #ffffff; }
+tbody tr:hover { background: #eef2ff; }
+.condition { text-align: left; font-weight: 500; }
+.temp { font-weight: 700; color: #dc2626; }
+.humidity { color: #0891b2; }
+.wind { color: #059669; }
+@media (max-width: 768px) {
+  body { padding: 0.5rem; }
+  h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+  .day-card { padding: 1rem; border-radius: 15px; }
+  .day-title { font-size: 1.1rem; }
+  th, td { padding: 0.5rem 0.3rem; font-size: 0.8rem; }
+}
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  .day-title { flex-direction: column; text-align: center; }
+  .day-title .date { margin-top: 0.5rem; }
+}
+</style>
+</head>
+<body>
+<div class='container'>
+<h1>⛅ Πρόγνωση ανά 3ωρο 🌡️</h1>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Παρασκευη</span><span class='date'>5 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>14:00</strong></td><td class='temp'>17°</td><td class='humidity'>67</td><td class='wind'>5 Δ</td><td>35</td><td>55</td><td class='condition'>☁️ ΑΡΑΙΗ ΣΥΝΝΕΦΙΑ</td></tr>
+<tr><td><strong>17:00</strong></td><td class='temp'>15°</td><td class='humidity'>83</td><td class='wind'>4 Δ</td><td>24</td><td>-</td><td class='condition'>☁️ ΛΙΓΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>20:00</strong></td><td class='temp'>14°</td><td class='humidity'>89</td><td class='wind'>4 Δ</td><td>24</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>23:00</strong></td><td class='temp'>14°</td><td class='humidity'>79</td><td class='wind'>4 ΝΔ</td><td>24</td><td>-</td><td class='condition'>☁️ ΑΡΑΙΗ ΣΥΝΝΕΦΙΑ</td></tr>
+</tbody></table></div></section>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Σαββατο</span><span class='date'>6 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>02:00</strong></td><td class='temp'>13°</td><td class='humidity'>80</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>05:00</strong></td><td class='temp'>12°</td><td class='humidity'>85</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ</td></tr>
+<tr><td><strong>08:00</strong></td><td class='temp'>12°</td><td class='humidity'>84</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>11:00</strong></td><td class='temp'>16°</td><td class='humidity'>67</td><td class='wind'>3 Δ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>14:00</strong></td><td class='temp'>16°</td><td class='humidity'>73</td><td class='wind'>3 Δ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΑΙΗ ΣΥΝΝΕΦΙΑ</td></tr>
+<tr><td><strong>17:00</strong></td><td class='temp'>13°</td><td class='humidity'>85</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>20:00</strong></td><td class='temp'>12°</td><td class='humidity'>86</td><td class='wind'>4 ΝΔ</td><td>24</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>23:00</strong></td><td class='temp'>12°</td><td class='humidity'>90</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+</tbody></table></div></section>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Κυριακη</span><span class='date'>7 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>02:00</strong></td><td class='temp'>10°</td><td class='humidity'>93</td><td class='wind'>2 N</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>05:00</strong></td><td class='temp'>12°</td><td class='humidity'>95</td><td class='wind'>3 Α</td><td>16</td><td>-</td><td class='condition'>⛈️ ΚΑΤΑΙΓΙΔΑ</td></tr>
+<tr><td><strong>08:00</strong></td><td class='temp'>12°</td><td class='humidity'>98</td><td class='wind'>2 BA</td><td>9</td><td>-</td><td class='condition'>🌧️ ΒΡΟΧΗ</td></tr>
+<tr><td><strong>11:00</strong></td><td class='temp'>16°</td><td class='humidity'>79</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>🌧️ ΒΡΟΧΗ</td></tr>
+<tr><td><strong>14:00</strong></td><td class='temp'>16°</td><td class='humidity'>79</td><td class='wind'>3 ΒΔ</td><td>16</td><td>-</td><td class='condition'>🌧️ ΑΣΘΕΝΗΣ ΒΡΟΧΗ</td></tr>
+<tr><td><strong>17:00</strong></td><td class='temp'>14°</td><td class='humidity'>92</td><td class='wind'>3 Δ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>20:00</strong></td><td class='temp'>11°</td><td class='humidity'>86</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>23:00</strong></td><td class='temp'>11°</td><td class='humidity'>86</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+</tbody></table></div></section>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Δευτερα</span><span class='date'>8 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>02:00</strong></td><td class='temp'>11°</td><td class='humidity'>97</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>05:00</strong></td><td class='temp'>12°</td><td class='humidity'>100</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>🌧️ ΒΡΟΧΗ</td></tr>
+<tr><td><strong>08:00</strong></td><td class='temp'>12°</td><td class='humidity'>97</td><td class='wind'>3 ΝΔ</td><td>16</td><td>-</td><td class='condition'>🌧️ ΒΡΟΧΗ</td></tr>
+<tr><td><strong>11:00</strong></td><td class='temp'>15°</td><td class='humidity'>78</td><td class='wind'>3 Δ</td><td>16</td><td>-</td><td class='condition'>🌧️ ΒΡΟΧΗ</td></tr>
+<tr><td><strong>14:00</strong></td><td class='temp'>14°</td><td class='humidity'>93</td><td class='wind'>4 B</td><td>24</td><td>-</td><td class='condition'>⛈️ ΚΑΤΑΙΓΙΔΑ</td></tr>
+<tr><td><strong>17:00</strong></td><td class='temp'>13°</td><td class='humidity'>96</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>⛈️ ΚΑΤΑΙΓΙΔΑ</td></tr>
+<tr><td><strong>20:00</strong></td><td class='temp'>13°</td><td class='humidity'>95</td><td class='wind'>3 BA</td><td>16</td><td>-</td><td class='condition'>⛈️ ΚΑΤΑΙΓΙΔΑ</td></tr>
+<tr><td><strong>23:00</strong></td><td class='temp'>13°</td><td class='humidity'>86</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>🌧️ ΒΡΟΧΗ</td></tr>
+</tbody></table></div></section>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Τριτη</span><span class='date'>9 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>02:00</strong></td><td class='temp'>12°</td><td class='humidity'>85</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>05:00</strong></td><td class='temp'>11°</td><td class='humidity'>89</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>08:00</strong></td><td class='temp'>13°</td><td class='humidity'>86</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ</td></tr>
+<tr><td><strong>11:00</strong></td><td class='temp'>14°</td><td class='humidity'>84</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ</td></tr>
+<tr><td><strong>14:00</strong></td><td class='temp'>15°</td><td class='humidity'>75</td><td class='wind'>4 B</td><td>24</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>17:00</strong></td><td class='temp'>13°</td><td class='humidity'>87</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>20:00</strong></td><td class='temp'>13°</td><td class='humidity'>87</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ</td></tr>
+<tr><td><strong>23:00</strong></td><td class='temp'>13°</td><td class='humidity'>88</td><td class='wind'>3 B</td><td>16</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+</tbody></table></div></section>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Τεταρτη</span><span class='date'>10 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>02:00</strong></td><td class='temp'>12°</td><td class='humidity'>89</td><td class='wind'>2 ΒΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>05:00</strong></td><td class='temp'>11°</td><td class='humidity'>91</td><td class='wind'>2 ΒΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>08:00</strong></td><td class='temp'>12°</td><td class='humidity'>92</td><td class='wind'>2 ΒΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ</td></tr>
+<tr><td><strong>11:00</strong></td><td class='temp'>15°</td><td class='humidity'>68</td><td class='wind'>2 ΒΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>14:00</strong></td><td class='temp'>15°</td><td class='humidity'>66</td><td class='wind'>2 ΒΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>17:00</strong></td><td class='temp'>12°</td><td class='humidity'>90</td><td class='wind'>2 ΝΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>20:00</strong></td><td class='temp'>9°</td><td class='humidity'>89</td><td class='wind'>2 ΝΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+<tr><td><strong>23:00</strong></td><td class='temp'>9°</td><td class='humidity'>98</td><td class='wind'>2 ΝΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+</tbody></table></div></section>
+<section class='day-card'>
+<div class='day-title'><span class='day-name'>📅 Πεμπτη</span><span class='date'>11 ΔΕΚΕΜΒΡΙΟΥ</span></div>
+<div class='table-wrapper'>
+<table>
+<thead><tr><th>🕐 Ώρα</th><th>🌡️ °C</th><th>💧 %</th><th>💨 Μπφ/κατ.</th><th>🌬️ Km/h</th><th>🌪️ Ριπές</th><th class='condition'>☁️ Φαινόμενο</th></tr></thead>
+<tbody>
+<tr><td><strong>02:00</strong></td><td class='temp'>10°</td><td class='humidity'>96</td><td class='wind'>2 ΝΔ</td><td>9</td><td>-</td><td class='condition'>☁️ ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ</td></tr>
+</tbody></table></div></section>
+</div>
+</body></html>
