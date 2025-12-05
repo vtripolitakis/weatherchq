@@ -21,7 +21,7 @@ jobs:
       - name: Generate forecast
         run: python weather.py --html -o index.html
         env:
-          WEATHER_URL: ${{ secrets.WEATHER_URL }}
+          WEATHER_URL: ${{ vars.WEATHER_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
