@@ -2,6 +2,7 @@ import os
 import re
 import json
 import argparse
+import html
 from dataclasses import dataclass
 from typing import Optional, List
 from pathlib import Path
@@ -75,6 +76,8 @@ def scrape_forecast(html: str) -> List[ForecastEntry]:
             # Ώρα
             time_cell = row.select_one("td.fulltime td")
             time_text = time_cell.get_text(strip=True) if time_cell else None
+            if not time_text:
+                continue
 
             # Θερμοκρασία
             temp_div = row.select_one("td.temperature .tempcolorcell")
@@ -280,11 +283,13 @@ def render_html(grouped_days) -> str:
     ]
 
     for day in grouped_days:
+        day_name = html.escape(str(day["day"]))
+        day_date = html.escape(str(day["date"]))
         parts.append("<section class='day-card'>")
         parts.append(
             f"<div class='day-title'>"
-            f"<span class='day-name'>📅 {day['day']}</span>"
-            f"<span class='date'>{day['date']}</span></div>"
+            f"<span class='day-name'>📅 {day_name}</span>"
+            f"<span class='date'>{day_date}</span></div>"
         )
         parts.append("<div class='table-wrapper'>")
         parts.append("<table>")
@@ -308,16 +313,19 @@ def render_html(grouped_days) -> str:
             
             weather_emoji = get_weather_emoji(h['condition'])
             temp_display = f"{h['temperature_c']}°" if h['temperature_c'] is not None else '-'
+            hour_text = html.escape(str(hour))
+            wind_text = html.escape(wind or '-')
+            condition_text = html.escape(str(h['condition']) if h['condition'] is not None else '-')
             
             parts.append(
                 "<tr>"
-                f"<td><strong>{hour}</strong></td>"
+                f"<td><strong>{hour_text}</strong></td>"
                 f"<td class='temp'>{temp_display}</td>"
                 f"<td class='humidity'>{h['humidity_pct'] if h['humidity_pct'] is not None else '-'}</td>"
-                f"<td class='wind'>{wind or '-'}</td>"
+                f"<td class='wind'>{wind_text}</td>"
                 f"<td>{h['wind_kmh'] if h['wind_kmh'] is not None else '-'}</td>"
                 f"<td>{h['gusts_kmh'] if h['gusts_kmh'] is not None else '-'}</td>"
-                f"<td class='condition'>{weather_emoji} {h['condition'] or '-'}</td>"
+                f"<td class='condition'>{weather_emoji} {condition_text}</td>"
                 "</tr>"
             )
         parts.append("</tbody></table></div></section>")
@@ -354,8 +362,24 @@ def main():
     if not args.url:
         parser.error("URL is required: use --url or set WEATHER_URL env var")
 
-    html = requests.get(args.url).text
-    entries = scrape_forecast(html)
+    try:
+        response = requests.get(
+            args.url,
+            timeout=30,
+            headers={"User-Agent": "weatherchq-forecast/1.0"},
+        )
+        response.raise_for_status()
+    except requests.RequestException as exc:
+        parser.error(f"Unable to download forecast: {exc}")
+
+    response.encoding = response.apparent_encoding or response.encoding
+    entries = scrape_forecast(response.text)
+    if not entries:
+        parser.error(
+            "No forecast entries found; the source page layout may have changed "
+            "or the URL may no longer be valid"
+        )
+
     grouped_days = group_by_day(entries)
 
     if args.html:
